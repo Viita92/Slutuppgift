@@ -117,13 +117,3 @@ XOR encryption is intended for:
 
 ---
 
-## 📄 License
-
-MIT License
-
----
-
-## ⭐ Contributing
-
-Pull requests, improvements, and suggestions are welcome.  
-If you find this project useful, consider giving it a ⭐ on GitHub.
