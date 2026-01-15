@@ -1,81 +1,129 @@
-XOR File Encryption / Decryption Tool
+# 🔐 XOR File Encryption / Decryption Tool
 
-This is a simple Python-based XOR encryption and decryption utility. It allows you to encrypt or decrypt any file using a user-provided XOR key. Since XOR is a symmetric operation, running the program again with the same key will decrypt the data.
+A lightweight **Python XOR encryption and decryption utility** for files.  
+Encrypt **any file**, output it in multiple formats, and decrypt it again using the **same key**.
 
-The tool supports multiple output formats, making it useful for both general file protection and embedding encrypted data into source code.
+> ⚠️ XOR is **symmetric** — encrypting twice with the same key restores the original data.
 
-Features
+---
 
-Encrypts and decrypts files using XOR
+## ✨ Features
 
-Supports both plaintext and hexadecimal keys
+- Encrypts and decrypts **any file type**
+- Supports **plaintext and hexadecimal keys**
+- Automatically repeats the key if it is shorter than the input
+- Multiple output formats for easy reuse
+- Safe handling of binary files
 
-Automatically repeats the key if it is shorter than the input
+---
 
-Multiple output formats:
+## 📦 Supported Output Formats
 
-raw – writes encrypted bytes directly to a file
+| Format | Description |
+|------|------------|
+| `raw` | Writes encrypted bytes directly to a file |
+| `python` | Outputs a Python `bytes([...])` array |
+| `c` | Outputs a C `unsigned char` array with length |
 
-python – outputs a Python bytes array
+---
 
-c – outputs a C unsigned char array with length
+## 🚀 Getting Started
 
-Handles binary files safely
+### 🔧 Requirements
 
-Clear error handling for invalid input, keys, or file paths
+- Python 3.7+
+- No external dependencies
 
-How It Works
+---
 
-The input file is read as raw bytes.
+### ▶️ Running the Program
 
-The key is parsed as either:
+```bash
+python inlamning.py
+```
 
-a UTF-8 string, or
+You will be prompted for:
 
-a hexadecimal byte sequence (e.g. 0xAA BB CC).
+- Input file path  
+- Output file path  
+- XOR key  
+- Output format (`raw`, `python`, or `c`)
 
-Each byte of the input is XORed with the corresponding byte of the key.
+---
 
-The key repeats automatically if it is shorter than the data.
+## 🔑 Key Formats
 
-The result is written in the selected output format.
+You can use **either plaintext or hexadecimal keys**.
 
-Because XOR is reversible, the same process is used for both encryption and decryption.
+### Plaintext Key Example
 
-Usage
-
-Run the script and follow the prompts:
-
-python xor_encrypt.py
-
-
-You will be asked for:
-
-Input file path
-
-Output file path
-
-XOR key
-
-Output format (raw, python, or c)
-
-Example hex key inputs:
-
-0x414243
-
-41 42 43
-
-Example string key:
-
+```text
 mysecretkey
+```
 
-Output Formats
+### Hexadecimal Key Examples
 
-raw
-Writes encrypted bytes directly to the output file.
+```text
+0x41 42 43
+```
 
-python
-Outputs a Python bytes([...]) array suitable for embedding in scripts.
+```text
+414243
+```
 
-c
-Outputs a C unsigned char array with a comment showing its length.
+---
+
+## 🧠 How It Works
+
+1. Reads the input file as raw bytes
+2. Parses the key as plaintext or hexadecimal
+3. XORs each byte of the file with the key (repeating as needed)
+4. Writes the result using the selected output format
+
+🔁 The same process is used for both encryption and decryption.
+
+---
+
+## 🧪 Example Workflow
+
+Encrypt a file:
+
+```text
+input.bin → encrypted.bin
+```
+
+Decrypt the file:
+
+```text
+encrypted.bin → original.bin
+```
+
+✔️ Using the same key restores the original file.
+
+---
+
+## 🛑 Security Notice
+
+> ⚠️ This tool is **not cryptographically secure**
+
+XOR encryption is intended for:
+
+- Educational purposes
+- Learning file and byte manipulation
+- Simple obfuscation
+- Malware analysis and research
+
+❌ Do **not** use this tool to protect sensitive or personal data.
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+## ⭐ Contributing
+
+Pull requests, improvements, and suggestions are welcome.  
+If you find this project useful, consider giving it a ⭐ on GitHub.
