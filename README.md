@@ -1,7 +1,7 @@
-# 🔐 XOR File Encryption / Decryption Tool
+# 🔐 XOR File Encryption 
 
-A lightweight **Python XOR encryption and decryption utility** for files.  
-Encrypt **any file**, output it in multiple formats, and decrypt it again using the **same key**.
+A lightweight **Python XOR encryption utility** for files.  
+Encrypt **any file**, output it in multiple formats
 
 > ⚠️ XOR is **symmetric** — encrypting twice with the same key restores the original data.
 
@@ -80,8 +80,6 @@ mysecretkey
 3. XORs each byte of the file with the key (repeating as needed)
 4. Writes the result using the selected output format
 
-🔁 The same process is used for both encryption and decryption.
-
 ---
 
 ## 🧪 Example Workflow
@@ -89,16 +87,8 @@ mysecretkey
 Encrypt a file:
 
 ```text
-input.bin → encrypted.bin
+input.bin → encrypted.txt
 ```
-
-Decrypt the file:
-
-```text
-encrypted.bin → original.bin
-```
-
-✔️ Using the same key restores the original file.
 
 ---
 
