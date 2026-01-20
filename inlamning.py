@@ -3,10 +3,14 @@ import sys
 
 def parse_args() -> argparse.Namespace:
 
-    # Parse command line arguments and return them as a Namespace object.
-    # This lets the user specify input/output files, key, and format when running the script.
+    """Prompt the user for file paths, XOR key, and output format.
 
-    parser = argparse.ArgumentParser()
+    Returns:
+        argparse.Namespace: User-provided input file, output file, key,
+        and output format ("raw", "python", or "c").
+    """
+    
+    # This lets the user specify input/output files, key, and format when running the script.
 
     # User adds Inputfile to encrypt/decrypted file
 
@@ -39,6 +43,8 @@ def parse_args() -> argparse.Namespace:
 
 def is_hex_like(s: str) -> bool:
 
+    """Return True if the string appears to be hexadecimal data."""
+
     # Check if input looks like hexadecimal (0x or aa bb cc dd)
     # Removes spaces and handles optional prefix.
 
@@ -57,6 +63,15 @@ def is_hex_like(s: str) -> bool:
         return False
     
 def parse_key(key_str: str) -> bytes:
+
+    """Convert a key string into bytes.
+
+    Accepts hex-encoded input (optional ``0x`` prefix and spaces) or a
+    plain string, which is UTF-8 encoded.
+
+    Raises:
+        ValueError: If the key is empty or invalid.
+    """
 
     # Converts string to bytes
 
@@ -80,6 +95,8 @@ def parse_key(key_str: str) -> bytes:
     
 def xor_bytes(data: bytes, key: bytes) -> bytes:
 
+    """ XOR data with a repeating key. Returns b"" if data is empty. Raises ValueError if key is empty. """
+
     # Perform XOR operation between data and key.
     # The key is repeated (reused) if shorter than the data.
 
@@ -95,14 +112,16 @@ def xor_bytes(data: bytes, key: bytes) -> bytes:
 
 def format_python_array(encrypted: bytes) -> str:
     
-    # Format encrypted bytes as a Python bytes array string.
+    """ Format bytes as a Python hex array string. """
+    # Format bytes as a Python hex array string.
 
     hex_items = ", ".join(f"0x{b:02X}" for b in encrypted)
     return f"bytes([{hex_items}])\n"
 
 def format_c_array(encrypted: bytes, var_name: str = "buf") -> str:
     
-    # Format encrypted bytes as a C array string.
+    """ Format bytes as a C hex array string. """
+    # Format bytes as a C hex array string.
 
     hex_items = ", ".join(f"0x{b:02X}" for b in encrypted)
     return (
@@ -111,6 +130,11 @@ def format_c_array(encrypted: bytes, var_name: str = "buf") -> str:
     )
 
 def main() -> int:
+
+    """
+    Process input, XOR it with a key, and write the output in the chosen format.
+    """
+    
     args = parse_args()
 
     # Reads the imput as raw bytes.
