@@ -1,44 +1,40 @@
 import argparse
 import sys
 
+
 def parse_args() -> argparse.Namespace:
-
-    """Prompt the user for file paths, XOR key, and output format.
-
-    Returns:
-        argparse.Namespace: User-provided input file, output file, key,
-        and output format ("raw", "python", or "c").
+    """Parse command-line arguments for file paths, XOR key, and output format.
     """
+    parser = argparse.ArgumentParser(
+        description="XOR encrypt/decrypt files with various output formats"
+    )
     
-    # This lets the user specify input/output files, key, and format when running the script.
-
-    # User adds Inputfile to encrypt/decrypted file
-
-    inputfile = input("Enter input file path: ")
-
-    # User sets destination for encrypted/decrypted file to be created
-
-    outfile = input("Enter output file path: ")
-
-    # XOR key
-
-    key = input("Enter XOR key: ")
-
-    # Able to add format of output, default set to raw
-
-    format_choice = input("Enter output format (raw/python/c) [default: raw]: ").strip().lower()
+    parser.add_argument(
+        "-i", "--inputfile",
+        required=True,
+        help="Path to the input file to encrypt/decrypt"
+    )
     
+    parser.add_argument(
+        "-o", "--outfile",
+        required=True,
+        help="Path to the output file"
+    )
     
-    if format_choice not in ["raw", "python", "c"]:
-        format_choice = "raw"
-        
-
-    return argparse.Namespace(
-        inputfile=inputfile,
-        outfile=outfile,
-        key=key,
-        format=format_choice
-        )
+    parser.add_argument(
+        "-k", "--key",
+        required=True,
+        help="XOR key for encryption/decryption"
+    )
+    
+    parser.add_argument(
+        "-f", "--format",
+        choices=["raw", "python", "c"],
+        default="raw",
+        help="Output format: raw, python, or c (default: raw)"
+    )
+    
+    return parser.parse_args()
     
 
 def is_hex_like(s: str) -> bool:
@@ -134,7 +130,7 @@ def main() -> int:
     """
     Process input, XOR it with a key, and write the output in the chosen format.
     """
-    
+
     args = parse_args()
 
     # Reads the imput as raw bytes.
