@@ -39,15 +39,9 @@ Encrypt **any file**, output it in multiple formats
 ### ▶️ Running the Program
 
 ```bash
-python inlamning.py
+python inlamning.py -i example.bin -o product.txt -k 0x41 -f c
 ```
 
-You will be prompted for:
-
-- Input file path  
-- Output file path  
-- XOR key  
-- Output format (`raw`, `python`, or `c`)
 
 ---
 
